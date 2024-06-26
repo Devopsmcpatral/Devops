@@ -1,7 +1,6 @@
 #!/bin/bash
 if [ $# -ne 2 ]; then
   echo "Usage: $0 <parameter1> <parameter1>"
-  echo "*******************************"
   exit 1
 fi
 
