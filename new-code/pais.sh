@@ -3,5 +3,7 @@
  echo "Cual es su pais de nacimiento: "
  read pais
 
- echo "Pais es: $pais"
+ echo 
+
+ echo "Tu pais es: $pais"
  # Tercera tarea 

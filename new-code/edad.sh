@@ -2,6 +2,6 @@
 
 echo "Cual es tu edad: "
 read edad
-
-echo "edad: $edad"
-#ultima tarea
+echo
+echo "Tu edad es: $edad"
+#Quinta tarea
