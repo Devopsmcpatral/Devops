@@ -16,16 +16,25 @@ def suma(numeros):
     return sum(numeros)
 
 def resta(numeros):
-    return numeros[0] - sum(numeros[1:])
+    resultado = numeros[0]
+    for num in numeros[1:]:
+        resultado -= num
+    return resultado
 
 def multiplicacion(numeros):
-    return math.prod(numeros)
+    resultado = 1
+    for num in numeros:
+        resultado *= num
+    return resultado
 
 def division(numeros):
     resultado = numeros[0]
-    for num in numeros[1:]:
-        resultado /= num
-    return resultado
+    try:
+        for num in numeros[1:]:
+            resultado /= num
+        return resultado
+    except ZeroDivisionError:
+        return "Error: No se puede dividir por cero."
 
 def potenciacion(base, exponente):
     return base ** exponente
@@ -33,76 +42,57 @@ def potenciacion(base, exponente):
 def raiz_cuadrada(numero):
     return math.sqrt(numero)
 
-def logaritmo(base, numero):
-    return math.log(numero, base)
-
-def raiz_cubica(numero):
-    return numero ** (1/3)
-
-def factorial(numero):
-    return math.factorial(numero)
-
 def mostrar_menu():
     print("\nSelecciona la operación que deseas realizar:")
-    print("1. Suma\n2. Resta\n3. Multiplicación\n4. División")
-    print("5. Potenciación\n6. Raíz cuadrada\n7. Logaritmo\n8. Raíz cúbica")
-    print("9. Factorial\n10. Salir")
-
-def mostrar_historia(opcion):
-    historias = {
-        "1": "La suma es la operación más básica de todas.",
-        "2": "La resta nos ayuda a encontrar la diferencia entre números.",
-        "3": "La multiplicación acelera las sumas repetidas.",
-        "4": "La división distribuye cantidades equitativamente.",
-        "5": "La potenciación eleva un número a la grandeza de su exponente.",
-        "6": "La raíz cuadrada deshace la multiplicación en parejas.",
-        "7": "El logaritmo descompone el crecimiento exponencial.",
-        "8": "La raíz cúbica revela el volumen de un cubo.",
-        "9": "El factorial multiplica una serie de números descendentes."
-    }
-    print(historias.get(opcion, ''))
+    print("1. Suma")
+    print("2. Resta")
+    print("3. Multiplicación")
+    print("4. División")
+    print("5. Potenciación")
+    print("6. Raíz cuadrada")
+    print("7. Salir")
 
 def ejecutar_operacion(opcion):
     if opcion in ["1", "2", "3", "4"]:
         cantidad_numeros = int(input("¿Cuántos números deseas ingresar? "))
+        if cantidad_numeros < 2:
+            print("Error: Debes ingresar al menos dos números para esta operación.")
+            return
         numeros = obtener_numeros(cantidad_numeros)
-        operaciones = {
-            "1": suma(numeros),
-            "2": resta(numeros),
-            "3": multiplicacion(numeros),
-            "4": division(numeros)
-        }
-        print(f"El resultado es: {operaciones[opcion]}")
+        if opcion == "1":
+            print("La suma es:", suma(numeros))
+        elif opcion == "2":
+            print("La resta es:", resta(numeros))
+        elif opcion == "3":
+            print("La multiplicación es:", multiplicacion(numeros))
+        elif opcion == "4":
+            resultado = division(numeros)
+            if isinstance(resultado, str):
+                print(resultado)
+            else:
+                print("La división es:", resultado)
     elif opcion == "5":
         base = float(input("Ingrese la base: "))
         exponente = float(input("Ingrese el exponente: "))
-        print(f"La potenciación es: {potenciacion(base, exponente)}")
+        print("La potenciación es:", potenciacion(base, exponente))
     elif opcion == "6":
         numero = float(input("Ingrese el número: "))
-        print(f"La raíz cuadrada es: {raiz_cuadrada(numero)}")
-    elif opcion == "7":
-        base = float(input("Ingrese la base del logaritmo: "))
-        numero = float(input("Ingrese el número: "))
-        print(f"El logaritmo es: {logaritmo(base, numero)}")
-    elif opcion == "8":
-        numero = float(input("Ingrese el número: "))
-        print(f"La raíz cúbica es: {raiz_cubica(numero)}")
-    elif opcion == "9":
-        numero = int(input("Ingrese el número (entero): "))
-        print(f"El factorial es: {factorial(numero)}")
-    elif opcion == "10":
-        print("¡Hasta luego!")
+        print("La raíz cuadrada es:", raiz_cuadrada(numero))
     else:
         print("Opción no válida. Por favor, elige una opción válida.")
 
 def calculadora():
     while True:
         mostrar_menu()
-        opcion = input("Ingresa el número de la operación (1-10): ")
-        if opcion == "10":
+        opcion = input("Ingresa el número de la operación: ")
+        if opcion == "7":
+            print("¡Hasta luego!")
             break
-        mostrar_historia(opcion)
         ejecutar_operacion(opcion)
+        continuar = input("¿Deseas realizar otra operación? (s/n): ")
+        if continuar.lower() != "s":
+            print("¡Hasta luego!")
+            break
 
 # Llamar a la función para que se ejecute
 calculadora()
