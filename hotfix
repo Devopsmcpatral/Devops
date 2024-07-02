@@ -1,0 +1,9 @@
+#Apprendiend git
+
+x=5
+
+if [[ x -eq 4]]; then
+    echo "x es igual a 4"
+else
+    echo "X es 5"
+fi
