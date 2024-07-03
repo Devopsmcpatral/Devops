@@ -1,0 +1,7 @@
+# Probando git
+
+x=20
+
+if [[ "$x" -eq 20 ]]; then
+  echo "x is 20"
+fi
